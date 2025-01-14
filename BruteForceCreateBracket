@@ -1,0 +1,24 @@
+class Main {
+    public static void createBracket(String output, int n, int open, int close, int index) {
+        // Base case
+        if (index == 2 * n) {
+            System.out.println(output);
+        }
+        
+        //Recursive case
+        //Add '['
+        if (open < n) {
+            createBracket(output + '[', n, open + 1, close, index + 1);
+        }
+        //Add ']'
+        if (close < open) {
+            createBracket(output + ']', n, open, close + 1, index + 1);
+        }
+    } 
+    
+    public static void main(String[] args) {
+        String output = "";
+        int n = 3;
+        createBracket(output, n, 0, 0, 0);
+    }
+}
