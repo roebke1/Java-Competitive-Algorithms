@@ -39,7 +39,7 @@ class Main {
         System.out.println();
     }
 
-    // This method finds the first solution to the problem and then prints out the
+    // This procedure finds the first solution to the problem and then prints out the
     // board representing the solution.
     public static boolean solveFirstNQueen(int n, int[][] board, int j) {
         //base case
@@ -62,9 +62,32 @@ class Main {
         return false;
     }
 
+    // This procedure counts all solutions to the problem and then prints out the
+    // board representing each solution.
+    public static int solveAllNQueen(int n, int[][] board, int j) {
+        //base case
+        if (j == n) {
+            //print the board
+            printBoard(n, board);
+            return 1;
+        }
+        //rec case
+        //try to place a queen in every row
+        int ways = 0;
+        for (int i = 0; i < n; i++) {
+            if (isNotThreatened(board, n, i, j)) {
+                board[i][j] = 1;
+                ways += solveAllNQueen(n, board, j + 1);
+                board[i][j] = 0;  
+            }
+        }
+        return ways;
+    }
+
     public static void main(String[] args) {
         int[][] board = new int[20][20];
         int n = 4;
-        solveFirstNQueen(n, board, 0);
+        //solveFirstNQueen(n, board, 0);
+        System.out.println("Ways solution is solvable: " + solveAllNQueen(n, board, 0));
     }
 }
