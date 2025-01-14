@@ -1,4 +1,4 @@
-//A simple program to find a position for a queen on a chessboard of size n such that each queen is not threatened by another queen.
+//A simple program to find a position for a queen on a chessboard of size n for each row such that each queen is not threatened by another queen.
 
 class Main {
     public static boolean isNotThreatened(int[][] board, int n, int x, int y) {
