@@ -1,3 +1,5 @@
+//Write a function to generate all possible n pairs of balanced brackets '[', and ']'.
+
 class Main {
     public static void createBracket(String output, int n, int open, int close, int index) {
         // Base case
