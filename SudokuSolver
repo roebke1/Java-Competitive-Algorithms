@@ -1,3 +1,6 @@
+// Given a partially filled Sudoku Matrix of size 9 by 9, write a function to complete the puzzle 
+// using Sudoku rules.  Input: 2-D Matrix  Output Solved 2-D Matrix
+
 public class SudokoSolver {
     public static boolean isSafe(int[][] mat, int i, int j, int number, int n) {
         // check for both row and column
