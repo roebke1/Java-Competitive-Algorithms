@@ -1,0 +1,22 @@
+import java.util.Scanner;
+//Given a 4 x n board and tiles of size 4 x 1, count the number of ways to tile
+//the given board using 4 x 1 tiles.
+
+public class Tiles {
+
+    public static int countWays(int n) {
+        //Base case
+        if (n <= 3) {
+            return 1;
+        }
+        // Recursive case: f(n) = f(n-1) + f(n-4)
+        return countWays(n - 1) + countWays(n - 4);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the size of the board: ");
+        int n = scanner.nextInt();
+        System.out.println(countWays(n));
+    }
+}
