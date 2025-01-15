@@ -1,0 +1,24 @@
+//Create a function to calculate the factorial value of a small integer
+
+import java.util.Scanner;
+
+public class Factorial {
+
+    public static int findFactorial(int n) {
+        // Base case
+        if(n <= 1) {
+            return 1;
+        }
+
+        // Recursive case
+        return n * findFactorial((n - 1));
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter an integer to find its factorial value: ");
+        int input = scanner.nextInt();
+        int answer = findFactorial(input);
+        System.out.println("The factorial of " + input + " is: " + answer);
+    }
+}
