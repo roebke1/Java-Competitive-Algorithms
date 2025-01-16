@@ -1,0 +1,70 @@
+import java.util.Scanner;
+
+// Count the number of binary Strings with no consecutive ones that can be formed using a
+// binary String of length n
+// Input: n
+// Output: count of Strings
+
+public class CountStrings {
+
+    public static int countStringsTable(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        // Base case: Create and fill in base case values in table
+        int[] table = new int[n + 1];
+        table[0] = 1;
+        table[1] = 2;
+
+        // Recursive case: Fill out the rest of the values in the table bottom up
+        for (int i = 2; i <= n; i++) {
+            table[i] = table[i - 1] + table[i - 2];
+        }
+
+        return table[n];
+    }
+
+    private static int countStringsMemoHelper(int[] memo, int n) {
+        if (memo[n] != 0) {
+            return memo[n];
+        }
+        return memo[n] = countStringsMemoHelper(memo, n -1) + countStringsMemoHelper(memo, n -2);
+    }
+
+   public static int countStringsMemo(int n) {
+        int[] memo = new int[n + 1];
+        if (n == 0) {
+            return 1;
+        }
+        if (n == 1) {
+            return 2;
+        }
+        memo[0] = 1;
+        memo[1] = 2;
+
+        return countStringsMemoHelper(memo, n);
+    }
+
+    public static int countStringsRecursive(int n) {
+        // Base case
+        if (n == 0) {
+            return 1;
+        }
+        if (n == 1) {
+            return 2;
+        }
+
+        // Recursive case f(n) = f(n - 1) + f(n - 2)
+        return countStringsRecursive(n - 1) + countStringsRecursive(n - 2);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the length of the binary String to be evaluated: ");
+        int n = scanner.nextInt();
+        // int answer = countStringsRecursive(n);
+        // int answer = countStringsMemo(n);
+        int answer = countStringsTable(n);
+        System.out.println(answer);
+    }
+}
