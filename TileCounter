@@ -1,8 +1,74 @@
 import java.util.Scanner;
+import java.lang.StringBuilder;
 //Given a 4 x n board and tiles of size 4 x 1, count the number of ways to tile
 //the given board using 4 x 1 tiles.
 
 public class Tiles {
+    private static void printBoard(StringBuilder record) throws IllegalArgumentException{
+        StringBuilder top = new StringBuilder();
+        StringBuilder topMiddle = new StringBuilder();
+        StringBuilder bottomMiddle = new StringBuilder();
+        StringBuilder bottom = new StringBuilder();
+
+        for (int i = 0; i < record.length(); i++) {
+            if (record.charAt(i) == 'V') {
+                top.append("|");
+                topMiddle.append("|");
+                bottomMiddle.append("|");
+                bottom.append("|");
+            }
+            else if (record.charAt(i) == 'H') {
+                top.append("----");
+                topMiddle.append("----");
+                bottomMiddle.append("----");
+                bottom.append("----");
+            }
+            else {
+                System.out.println(record);
+                throw new IllegalArgumentException("The valid values for the record are 'V' and 'H' only.");
+            }
+        }
+
+        System.out.println();
+        System.out.println(top);
+        System.out.println(topMiddle);
+        System.out.println(bottomMiddle);
+        System.out.println(bottom);
+        System.out.println();
+    }
+
+    private static int countAndDrawWays(StringBuilder record, int n) {
+        //Base case
+        if (n <= 3) {
+            for (int i = n; i > 0; i--) {
+                record.append("V");
+            }
+            try {
+                printBoard(record);
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            for (int i = n; i > 0; i--) {
+                record.deleteCharAt(record.length() - 1);
+            }
+            return 1;
+        }
+        // Recursive case: f(n) = f(n-1) + f(n-4)
+        int total = 0;
+        total += countAndDrawWays(record.append("V"), n - 1);
+        record.deleteCharAt(record.length() - 1);
+
+        total += countAndDrawWays(record.append("H"), n - 4);
+        record.deleteCharAt(record.length() - 1);
+
+        return total;
+    }
+
+    public static int countWaysWithDrawing(int n) {
+        StringBuilder record = new StringBuilder();
+        return countAndDrawWays(record, n);
+    }
 
     public static int countWays(int n) {
         //Base case
@@ -17,6 +83,6 @@ public class Tiles {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the size of the board: ");
         int n = scanner.nextInt();
-        System.out.println(countWays(n));
+        System.out.println("Number of ways tiles can be arranged: " + countWaysWithDrawing(n));
     }
 }
